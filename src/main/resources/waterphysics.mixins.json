@@ -1,0 +1,16 @@
+{
+  "required": false,
+  "package": "com.ldtteam.waterphysics.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "waterphysics.refmap.json",
+  "mixins": [
+    "ChunkTickMixin",
+    "WaterNeighborMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "minVersion": "0.8"
+}
