@@ -1,6 +1,5 @@
 package com.ldtteam.waterphysics.utils;
 
-import com.mojang.math.Axis;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ChunkHolder;
@@ -14,8 +13,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkStatus;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.chunk.LevelChunkSection;
-
-import java.util.Random;
 
 import static net.minecraft.world.level.block.Block.*;
 

@@ -1,8 +1,6 @@
 package com.ldtteam.waterphysics;
 
 import com.ldtteam.waterphysics.handlers.*;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.level.GameRules;
 import net.minecraftforge.event.level.LevelEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -30,11 +28,6 @@ public class WaterPhysics
         if (event.getLevel().isClientSide())
         {
             return;
-        }
-
-        if (((ServerLevel) event.getLevel()).getGameRules().getBoolean(GameRules.RULE_WATER_SOURCE_CONVERSION))
-        {
-            ((ServerLevel) event.getLevel()).getGameRules().getRule(GameRules.RULE_WATER_SOURCE_CONVERSION).set(false, event.getLevel().getServer());
         }
     }
 }

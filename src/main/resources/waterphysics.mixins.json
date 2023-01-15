@@ -5,7 +5,8 @@
   "refmap": "waterphysics.refmap.json",
   "mixins": [
     "ChunkTickMixin",
-    "WaterNeighborMixin"
+    "WaterNeighborMixin",
+    "WaterFluidMixin"
   ],
   "client": [
   ],

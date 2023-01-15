@@ -23,7 +23,7 @@ public class WaterFlow implements ITransformationHandler
     @Override
     public boolean ready(final long worldTick, final LevelChunk chunk)
     {
-        return !chunk.getLevel().getGameRules().getBoolean(GameRules.RULE_WATER_SOURCE_CONVERSION);
+        return true;
     }
 
     @Override
