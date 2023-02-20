@@ -20,7 +20,7 @@ public abstract class WaterNeighborMixin
     @Shadow public abstract Fluid getType();
 
     @Inject(method = "tick", at = @At("TAIL"))
-    public void neighborChanged(final Level level, final BlockPos pos, final CallbackInfo ci)
+    public void waterPhysicsNeighborChanged(final Level level, final BlockPos pos, final CallbackInfo ci)
     {
         if (isSource() && getType() == Fluids.WATER && !Utils.tryMoveBelow(level, pos, false) && !Utils.tryMoveSidewards(level, pos, false))
         {

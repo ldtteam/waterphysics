@@ -22,7 +22,7 @@ public abstract class ChunkTickMixin
     private int randValue = RandomSource.create().nextInt();
 
     @Inject(method = "tickChunk", at = @At("HEAD"))
-    public void tickChunk(final LevelChunk chunk, final int k, final CallbackInfo ci)
+    public void WaterPhysicsTickChunk(final LevelChunk chunk, final int k, final CallbackInfo ci)
     {
         if (k <= 0 || chunk.getLevel().getGameTime() != 0 && chunk.getLevel().getRandom().nextInt(10) != 1)
         {
