@@ -1,6 +1,5 @@
 package com.ldtteam.waterphysics.utils;
 
-import com.mojang.math.Axis;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ChunkHolder;
@@ -15,22 +14,22 @@ import net.minecraft.world.level.chunk.ChunkStatus;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.chunk.LevelChunkSection;
 
-import java.util.Random;
-
 import static net.minecraft.world.level.block.Block.*;
 
 public class Utils
 {
     /**
      * Get the worldPos from a relative chunkpos.
-     * @param chunk the relative chunk.
-     * @param section its section.
+     *
+     * @param chunk       the relative chunk.
+     * @param section     its section.
      * @param relativePos the relative pos.
+     * @param bottomY the bottom y pos.
      * @return the in world pos.
      */
-    public static BlockPos getWorldPos(final LevelChunk chunk, final LevelChunkSection section, final BlockPos relativePos)
+    public static BlockPos getWorldPos(final LevelChunk chunk, final LevelChunkSection section, final BlockPos relativePos, final int bottomY)
     {
-        return new BlockPos(chunk.getPos().getMinBlockX() + relativePos.getX(), section.bottomBlockY() + relativePos.getY(), chunk.getPos().getMinBlockZ() + relativePos.getZ());
+        return new BlockPos(chunk.getPos().getMinBlockX() + relativePos.getX(), bottomY + relativePos.getY(), chunk.getPos().getMinBlockZ() + relativePos.getZ());
     }
 
     /**
@@ -79,7 +78,7 @@ public class Utils
     {
         if (pos.getX() >= 16 || pos.getZ() >= 16 || pos.getX() < 0 || pos.getZ() < 0)
         {
-            final BlockPos worldPos = Utils.getWorldPos(chunk, chunk.getSections()[sectionId], pos);
+            final BlockPos worldPos = Utils.getWorldPos(chunk, chunk.getSections()[sectionId], pos, chunk.getSectionYFromSectionIndex(sectionId));
             if (Utils.isBlockLoaded(chunk.getLevel(), worldPos))
             {
                 return chunk.getLevel().getBlockState(worldPos);
@@ -179,7 +178,7 @@ public class Utils
     public static void tryMoveDiagonally(final Level level, final BlockPos pos, final boolean allowAir)
     {
         final BlockState initialAboveState = level.getBlockState(pos.above());
-        if (initialAboveState.getMaterial().isSolid())
+        if (initialAboveState.isSolid())
         {
             return;
         }

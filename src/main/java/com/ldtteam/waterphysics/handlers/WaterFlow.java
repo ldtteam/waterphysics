@@ -7,7 +7,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.chunk.LevelChunkSection;
 
-
 /**
  * Mud dries up
  */
@@ -29,7 +28,7 @@ public class WaterFlow implements ITransformationHandler
     public void transformBlock(final BlockPos relativePos, final LevelChunk chunk, final int chunkSection, final BlockState input)
     {
         final LevelChunkSection section = chunk.getSections()[chunkSection];
-        final BlockPos worldPos = Utils.getWorldPos(chunk, section, relativePos);
+        final BlockPos worldPos = Utils.getWorldPos(chunk, section, relativePos, chunk.getSectionYFromSectionIndex(chunkSection));
         if (!Utils.tryMoveBelow(chunk.getLevel(), worldPos, true) && !Utils.tryMoveSidewards(chunk.getLevel(), worldPos, true))
         {
             Utils.tryMoveDiagonally(chunk.getLevel(), worldPos, true);
