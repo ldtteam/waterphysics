@@ -2,7 +2,6 @@ package com.ldtteam.waterphysics.handlers;
 
 import com.ldtteam.waterphysics.utils.Utils;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.LevelChunk;
