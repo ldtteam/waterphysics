@@ -4,6 +4,7 @@ import com.ldtteam.waterphysics.utils.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
@@ -23,7 +24,7 @@ public abstract class WaterNeighborMixin
     @Inject(method = "tick", at = @At("TAIL"))
     public void waterPhysicsNeighborChanged(final Level level, final BlockPos pos, final CallbackInfo ci)
     {
-        if (isSource() && getType() == Fluids.WATER && !Utils.tryMoveBelow(level, pos, false) && !Utils.tryMoveSidewards(level, pos, false))
+        if (isSource() && getType() == Fluids.WATER && level.getBlockState(pos).getBlock() == Blocks.WATER && !Utils.tryMoveBelow(level, pos, false) && !Utils.tryMoveSidewards(level, pos, false))
         {
             Utils.tryMoveDiagonally(level, pos, false);
         }
