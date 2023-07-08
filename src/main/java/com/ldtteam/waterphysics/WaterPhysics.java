@@ -3,6 +3,7 @@ package com.ldtteam.waterphysics;
 import com.ldtteam.waterphysics.handlers.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
@@ -47,15 +48,34 @@ public class WaterPhysics
     @SubscribeEvent
     public static void PistonPushEvent(final PistonEvent event)
     {
-        if (event.getLevel().isClientSide() || event.getPistonMoveType() != PistonEvent.PistonMoveType.EXTEND)
+        if (event.getLevel().isClientSide())
         {
             return;
         }
 
-        final BlockState state = event.getLevel().getBlockState(event.getFaceOffsetPos());
-        if (state.getFluidState() != null && state.getFluidState().is(Fluids.WATER) && state.getFluidState().isSource())
+        if (event.getPistonMoveType() == PistonEvent.PistonMoveType.EXTEND)
         {
-            event.getLevel().setBlock(event.getFaceOffsetPos().relative(event.getDirection()), state, UPDATE_ALL);
+            final BlockState targetState = event.getLevel().getBlockState(event.getFaceOffsetPos().relative(event.getDirection()));
+            final BlockState state = event.getLevel().getBlockState(event.getFaceOffsetPos());
+            if (state.getFluidState() != null
+                  && state.getFluidState().is(Fluids.WATER)
+                  && state.getFluidState().isSource()
+                  && (targetState.isAir() || targetState.getBlock() == Blocks.WATER && !targetState.getFluidState().isSource()))
+            {
+                event.getLevel().setBlock(event.getFaceOffsetPos().relative(event.getDirection()), Blocks.WATER.defaultBlockState(), UPDATE_ALL);
+            }
+        }
+        else
+        {
+            final BlockState state = event.getLevel().getBlockState(event.getFaceOffsetPos().relative(event.getDirection()));
+            if (state.getFluidState() != null
+                  && state.getFluidState().is(Fluids.WATER)
+                  && state.getFluidState().isSource()
+                  && event.getLevel().getBlockState(event.getFaceOffsetPos()).isAir())
+            {
+                event.getLevel().setBlock(event.getFaceOffsetPos().relative(event.getDirection()), Blocks.AIR.defaultBlockState(), UPDATE_ALL);
+                event.getLevel().setBlock(event.getFaceOffsetPos(), state, UPDATE_ALL);
+            }
         }
     }
 }
