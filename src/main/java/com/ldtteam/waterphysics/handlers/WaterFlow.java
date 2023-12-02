@@ -28,7 +28,7 @@ public class WaterFlow implements ITransformationHandler
     public void transformBlock(final BlockPos relativePos, final LevelChunk chunk, final int chunkSection, final BlockState input)
     {
         final LevelChunkSection section = chunk.getSections()[chunkSection];
-        final BlockPos worldPos = Utils.getWorldPos(chunk, section, relativePos, chunk.getSectionYFromSectionIndex(chunkSection));
+        final BlockPos worldPos = Utils.getWorldPos(chunk, section, relativePos, chunk.getSectionYFromSectionIndex(chunkSection)*16);
         if (!Utils.tryMoveBelow(chunk.getLevel(), worldPos, true) && !Utils.tryMoveSidewards(chunk.getLevel(), worldPos, true))
         {
             Utils.tryMoveDiagonally(chunk.getLevel(), worldPos, true);

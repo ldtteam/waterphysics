@@ -78,7 +78,7 @@ public class Utils
     {
         if (pos.getX() >= 16 || pos.getZ() >= 16 || pos.getX() < 0 || pos.getZ() < 0)
         {
-            final BlockPos worldPos = Utils.getWorldPos(chunk, chunk.getSections()[sectionId], pos, chunk.getSectionYFromSectionIndex(sectionId));
+            final BlockPos worldPos = Utils.getWorldPos(chunk, chunk.getSections()[sectionId], pos, chunk.getSectionYFromSectionIndex(sectionId)*16);
             if (Utils.isBlockLoaded(chunk.getLevel(), worldPos))
             {
                 return chunk.getLevel().getBlockState(worldPos);

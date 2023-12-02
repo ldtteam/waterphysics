@@ -29,6 +29,7 @@ public class WaterPhysics
         Mod.EventBusSubscriber.Bus.FORGE.bus().get().register(this.getClass());
         ITransformationHandler.HANDLERS.add(new WaterFlow());
         ITransformationHandler.HANDLERS.add(new WaterSourcing());
+        ITransformationHandler.HANDLERS.add(new CauldronFill());
     }
 
     @SubscribeEvent

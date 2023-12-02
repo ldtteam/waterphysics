@@ -31,7 +31,7 @@ public class WaterSourcing implements ITransformationHandler
     public void transformBlock(final BlockPos relativePos, final LevelChunk chunk, final int chunkSection, final BlockState input)
     {
         final LevelChunkSection section = chunk.getSections()[chunkSection];
-        final BlockPos worldPos = Utils.getWorldPos(chunk, section, relativePos, chunk.getSectionYFromSectionIndex(chunkSection));
+        final BlockPos worldPos = Utils.getWorldPos(chunk, section, relativePos, chunk.getSectionYFromSectionIndex(chunkSection)*16);
 
         int waterCount = 0;
         for (final Direction direction : Direction.Plane.HORIZONTAL)
