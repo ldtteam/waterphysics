@@ -16,19 +16,19 @@ public class AnvilMixin
         cir.setReturnValue(((int) (currentCost * 1.2)) + 1);
     }
 
-    @ModifyArg(method = "createResult", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/inventory/DataSlot;set(I)V "), index = 0)
+    @ModifyArg(method = "createResultInternal", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/inventory/DataSlot;set(I)V "), index = 0)
     private int limitMaxCost(int cost)
     {
         return Math.min(cost, 10);
     }
 
-    @ModifyVariable(method = "createResult", at = @At(value = "STORE"), name="i1")
+    @ModifyVariable(method = "createResultInternal", at = @At(value = "STORE"), name="i1")
     private int adjRepairEqualItemCost(final int oldValue, @Local(ordinal = 1) int j)
     {
         return (int) Math.ceil(oldValue / Math.max(2.0, j));
     }
 
-    @ModifyVariable(method = "createResult", at = @At(value = "STORE"), name="l2")
+    @ModifyVariable(method = "createResultInternal", at = @At(value = "STORE"), name="l2")
     private int adjRepairItemCost(final int oldValue, @Local(ordinal = 1) int j, @Local(ordinal = 1) ItemStack itemstack1)
     {
         return Math.min(itemstack1.getDamageValue(), itemstack1.getMaxDamage() / Math.max(4, j*2));
